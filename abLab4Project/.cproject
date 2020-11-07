@@ -274,6 +274,11 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
+					<fileInfo id="com.crt.advproject.config.exe.debug.1821451573.592455134" name="Lab4Main.c" rcbsApplicability="disable" resourcePath="source/Lab4Main.c" toolsToInvoke="com.crt.advproject.gcc.exe.debug.453880579.712552516">
+						<tool id="com.crt.advproject.gcc.exe.debug.453880579.712552516" name="MCU C Compiler" superClass="com.crt.advproject.gcc.exe.debug.453880579">
+							<inputType id="com.crt.advproject.compiler.input.1226208845" superClass="com.crt.advproject.compiler.input"/>
+						</tool>
+					</fileInfo>
 					<sourceEntries>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="CMSIS"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="board"/>
@@ -586,21 +591,6 @@
 	<storageModule moduleId="cdtBuildSystem" version="4.0.0">
 		<project id="Lab1SDK270.null.221383080" name="Lab1SDK270" projectType="com.crt.advproject.projecttype.exe"/>
 	</storageModule>
-	<storageModule moduleId="scannerConfiguration">
-		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.1821451573;com.crt.advproject.config.exe.debug.1821451573.;com.crt.advproject.gcc.exe.debug.453880579;com.crt.advproject.compiler.input.1282520284">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.release.1880608512;com.crt.advproject.config.exe.release.1880608512.;com.crt.advproject.gas.exe.release.527305235;com.crt.advproject.assembler.input.1807854432">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.1821451573;com.crt.advproject.config.exe.debug.1821451573.;com.crt.advproject.gas.exe.debug.1609773503;com.crt.advproject.assembler.input.1264778425">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.release.1880608512;com.crt.advproject.config.exe.release.1880608512.;com.crt.advproject.gcc.exe.release.2130415889;com.crt.advproject.compiler.input.1758414776">
-			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
-		</scannerConfigBuildInfo>
-	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.core.LanguageSettingsProviders"/>
 	<storageModule moduleId="com.nxp.mcuxpresso.core.datamodels">
 		<sdkName>SDK_2.x_TWR-K65F180M</sdkName>
@@ -646,4 +636,19 @@
 		</configuration>
 	</storageModule>
 	<storageModule moduleId="org.eclipse.cdt.internal.ui.text.commentOwnerProjectMappings"/>
+	<storageModule moduleId="scannerConfiguration">
+		<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.release.1880608512;com.crt.advproject.config.exe.release.1880608512.;com.crt.advproject.gas.exe.release.527305235;com.crt.advproject.assembler.input.1807854432">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.1821451573;com.crt.advproject.config.exe.debug.1821451573.;com.crt.advproject.gcc.exe.debug.453880579;com.crt.advproject.compiler.input.1282520284">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.release.1880608512;com.crt.advproject.config.exe.release.1880608512.;com.crt.advproject.gcc.exe.release.2130415889;com.crt.advproject.compiler.input.1758414776">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+		<scannerConfigBuildInfo instanceId="com.crt.advproject.config.exe.debug.1821451573;com.crt.advproject.config.exe.debug.1821451573.;com.crt.advproject.gas.exe.debug.1609773503;com.crt.advproject.assembler.input.1264778425">
+			<autodiscovery enabled="true" problemReportingEnabled="true" selectedProfileId=""/>
+		</scannerConfigBuildInfo>
+	</storageModule>
 </cproject>
