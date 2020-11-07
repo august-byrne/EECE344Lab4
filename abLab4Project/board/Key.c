@@ -82,7 +82,7 @@ void KeyInit(void){
 * (Public)
 ****************************************************************************************/
 void KeyTask(void) {
-
+	DB2_TURN_ON();
     INT8U cur_key;
     static INT8U last_key = 0;
     static KEYSTATES keyState = KEY_OFF;
@@ -110,6 +110,7 @@ void KeyTask(void) {
         keyState = KEY_OFF;             /* Should never get here */
     }
     last_key = cur_key;                 /* Save key for next time */
+    DB2_TURN_OFF();
 }
 
 /****************************************************************************************

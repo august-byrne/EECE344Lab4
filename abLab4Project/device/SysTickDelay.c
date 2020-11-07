@@ -14,6 +14,7 @@
 *****************************************************************************************/
 #include "MCUType.h"
 #include "SysTickDelay.h"
+#include "K65TWR_GPIO.h"
 
 /*****************************************************************************************
 * Handler must not be static so linker can see it.
@@ -52,7 +53,7 @@ void SysTickDelay(const INT32U ms){
 *    - Accuracy +0/-1 ms
 *****************************************************************************************/
 void SysTickWaitEvent(const INT32U period){
-
+	DB0_TURN_ON();
     if(stInitFlag == 1){
         while((stmsCount - stLastEvent) < period){}
     }else{
@@ -60,6 +61,7 @@ void SysTickWaitEvent(const INT32U period){
     }
     stLastEvent = stmsCount;
     stSliceCount++;
+    DB0_TURN_OFF();
 }
 
 /*****************************************************************************************
