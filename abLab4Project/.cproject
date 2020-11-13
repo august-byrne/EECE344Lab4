@@ -274,11 +274,6 @@
 							</tool>
 						</toolChain>
 					</folderInfo>
-					<fileInfo id="com.crt.advproject.config.exe.debug.1821451573.592455134" name="Lab4Main.c" rcbsApplicability="disable" resourcePath="source/Lab4Main.c" toolsToInvoke="com.crt.advproject.gcc.exe.debug.453880579.712552516">
-						<tool id="com.crt.advproject.gcc.exe.debug.453880579.712552516" name="MCU C Compiler" superClass="com.crt.advproject.gcc.exe.debug.453880579">
-							<inputType id="com.crt.advproject.compiler.input.1226208845" superClass="com.crt.advproject.compiler.input"/>
-						</tool>
-					</fileInfo>
 					<sourceEntries>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="CMSIS"/>
 						<entry flags="LOCAL|VALUE_WORKSPACE_PATH|RESOLVED" kind="sourcePath" name="board"/>
