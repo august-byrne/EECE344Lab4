@@ -12,6 +12,8 @@
 #include "SysTickDelay.h"
 
 #define POLL_PERIOD 10
+#define LOWADDR (INT32U *) 0x00000000			//low memory address
+#define HIGHADRR (INT32U *) 0x001FFFFF		//high memory address
 
 static void ControlDisplayTask(void);
 
@@ -20,16 +22,15 @@ static ALARM_STATE CurrentAlarmState = ALARM_OFF;	//initial state is alarm off
 static ALARM_STATE PreviousAlarmState = ALARM_ON;
 
 void main(void){
-	const INT32U low_addr = 0x00000000;			//low memory address
-	const INT32U high_addr = 0x001FFFFF;		//high memory address
 	K65TWR_BootClock();             /* Initialize MCU clocks                  */
 	SysTickDlyInit();
 	GpioDBugBitsInit();
 	LcdDispInit();
 	KeyInit();
+	AlarmWaveInit();
 
 	LcdCursorMove(2,1);					//program start initial checksum
-	INT16U math_val = CalcChkSum((INT8U *)low_addr,(INT8U *)high_addr);
+	INT16U math_val = CalcChkSum(LOWADDR,HIGHADRR);
 	LcdDispString("CS: ");
 	LcdDispHexWord(math_val,4);
 	LcdCursorMove(1,1);
@@ -42,7 +43,7 @@ void main(void){
 	}
 }
 
-void ControlDisplayTask(void){
+static void ControlDisplayTask(void){
 	DB1_TURN_ON();
 	switch (CurrentAlarmState){
 	case ALARM_OFF:
@@ -61,11 +62,11 @@ void ControlDisplayTask(void){
 			LcdDispLineClear(1);
 			LcdDispString("ALARM ON");
 			PreviousAlarmState = CurrentAlarmState;
+			AlarmWaveControlTask();			//alarm signal is on, so make noise
 		}
 		if (KeyGet() == DC4){			//if d is pressed, set alarm state as off
 			CurrentAlarmState = ALARM_OFF;
 		}
-		//AlarmWaveControlTask();			//alarm signal is on, so make noise
 		break;
 	default:
 		CurrentAlarmState = ALARM_OFF;
