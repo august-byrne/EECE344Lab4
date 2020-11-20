@@ -9,9 +9,7 @@
 #define ALARMWAVE_H_
 
 void AlarmWaveInit(void);
-void AlarmWaveControlTask(void);
+//void AlarmWaveControlTask(void);
 void AlarmWaveSetMode(void);
-void PIT0_IRQHandler(void);
-
 
 #endif /* ALARMWAVE_H_ */

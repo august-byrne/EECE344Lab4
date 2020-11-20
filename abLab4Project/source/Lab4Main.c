@@ -10,6 +10,7 @@
 #include "Key.h"
 #include "LCD.h"
 #include "SysTickDelay.h"
+#include "AlarmWave.h"
 
 #define POLL_PERIOD 10
 #define LOWADDR (INT32U *) 0x00000000			//low memory address
@@ -51,10 +52,11 @@ static void ControlDisplayTask(void){
 			LcdDispLineClear(1);
 			LcdDispString("ALARM OFF");
 			PreviousAlarmState = CurrentAlarmState;
-		}
+			AlarmWaveSetMode();
+		}else{}
 		if (KeyGet() == DC1){			//if a is pressed, set alarm state as on
 			CurrentAlarmState = ALARM_ON;
-		}
+		}else{}
 											//alarm signal is off
 		break;
 	case ALARM_ON:
@@ -62,11 +64,13 @@ static void ControlDisplayTask(void){
 			LcdDispLineClear(1);
 			LcdDispString("ALARM ON");
 			PreviousAlarmState = CurrentAlarmState;
-			AlarmWaveControlTask();			//alarm signal is on, so make noise
-		}
+			//AlarmWaveControlTask();			//alarm signal is on, so make noise
+			//I could also call the alarmwavesetmode here and above, instead of alarmwavecontroltask
+			AlarmWaveSetMode();
+		}else{}
 		if (KeyGet() == DC4){			//if d is pressed, set alarm state as off
 			CurrentAlarmState = ALARM_OFF;
-		}
+		}else{}
 		break;
 	default:
 		CurrentAlarmState = ALARM_OFF;
