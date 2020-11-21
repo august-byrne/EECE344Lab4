@@ -1,7 +1,10 @@
 /*******************************************************************************
 * EECE344 Lab 4 Code
-*	This program allows the user to activate and deactivate an alarm tone
-* August Byrne, 11/15/2020
+*	This program allows the user to activate and deactivate an alarm tone. The
+*	choice is displayed on the lcd, along with the checksum of the program, and
+*	you can switch between alarm off and alarm on with the press of either A or D
+*	on the K65TWR's keypad.
+* August Byrne, 11/20/2020
 *******************************************************************************/
 #include "MCUType.h"               /* Include header files                    */
 #include "MemTest.h"
@@ -30,7 +33,8 @@ void main(void){
 	KeyInit();
 	AlarmWaveInit();
 
-	LcdCursorMove(2,1);					//program start initial checksum
+	//Initial program checksum, which is displayed on the second row of the lcd
+	LcdCursorMove(2,1);
 	INT16U math_val = CalcChkSum(LOWADDR,HIGHADRR);
 	LcdDispString("CS: ");
 	LcdDispHexWord(math_val,4);
@@ -39,7 +43,7 @@ void main(void){
 	while(1){
 		SysTickWaitEvent(POLL_PERIOD);
 		ControlDisplayTask();
-		//AlarmWaveControlTask();
+		AlarmWaveControlTask();
 		KeyTask();
 	}
 }
@@ -52,21 +56,18 @@ static void ControlDisplayTask(void){
 			LcdDispLineClear(1);
 			LcdDispString("ALARM OFF");
 			PreviousAlarmState = CurrentAlarmState;
-			AlarmWaveSetMode();
+			AlarmWaveSetMode();			//toggle the alarm wave mode
 		}else{}
 		if (KeyGet() == DC1){			//if a is pressed, set alarm state as on
 			CurrentAlarmState = ALARM_ON;
 		}else{}
-											//alarm signal is off
 		break;
 	case ALARM_ON:
 		if (PreviousAlarmState != CurrentAlarmState){		//display "alarm on" on the lcd
 			LcdDispLineClear(1);
 			LcdDispString("ALARM ON");
 			PreviousAlarmState = CurrentAlarmState;
-			//AlarmWaveControlTask();			//alarm signal is on, so make noise
-			//I could also call the alarmwavesetmode here and above, instead of alarmwavecontroltask
-			AlarmWaveSetMode();
+			AlarmWaveSetMode();			//toggle the alarm wave mode
 		}else{}
 		if (KeyGet() == DC4){			//if d is pressed, set alarm state as off
 			CurrentAlarmState = ALARM_OFF;
