@@ -1,10 +1,10 @@
 /*******************************************************************************
 * EECE344 Lab 4 Code
 *	This program allows the user to activate and deactivate an alarm tone. The
-*	choice is displayed on the lcd, along with the checksum of the program, and
+*	choice is displayed on the LCD, along with the checksum of the program, and
 *	you can switch between alarm off and alarm on with the press of either A or D
 *	on the K65TWR's keypad.
-* August Byrne, 11/20/2020
+* August Byrne, 11/20/2020, edited on 12/10/2020
 *******************************************************************************/
 #include "MCUType.h"               /* Include header files                    */
 #include "MemTest.h"
@@ -16,8 +16,8 @@
 #include "AlarmWave.h"
 
 #define POLL_PERIOD 10
-#define LOWADDR (INT32U *) 0x00000000			//low memory address
-#define HIGHADRR (INT32U *) 0x001FFFFF		//high memory address
+#define LOWADDR (INT32U) 0x00000000		//low memory address
+#define HIGHADRR (INT32U) 0x001FFFFF		//high memory address
 
 static void ControlDisplayTask(void);
 
@@ -26,6 +26,7 @@ static ALARM_STATE CurrentAlarmState = ALARM_OFF;	//initial state is alarm off
 static ALARM_STATE PreviousAlarmState = ALARM_ON;
 
 void main(void){
+	INT16U math_val = 0;
 	K65TWR_BootClock();             /* Initialize MCU clocks                  */
 	SysTickDlyInit();
 	GpioDBugBitsInit();
@@ -33,9 +34,9 @@ void main(void){
 	KeyInit();
 	AlarmWaveInit();
 
-	//Initial program checksum, which is displayed on the second row of the lcd
+	//Initial program checksum, which is displayed on the second row of the LCD
 	LcdCursorMove(2,1);
-	INT16U math_val = CalcChkSum(LOWADDR,HIGHADRR);
+	math_val = CalcChkSum((INT8U *)LOWADDR,(INT8U *)HIGHADRR);
 	LcdDispString("CS: ");
 	LcdDispHexWord(math_val,4);
 	LcdCursorMove(1,1);
@@ -48,11 +49,17 @@ void main(void){
 	}
 }
 
+/****************************************************************************************
+* ControlDisplayTask() - A task that poles for keypad presses (using KeyGet()) and
+*             updates the alarm mode (by using AlarmWaveSetMode() to toggle the alarm mode)
+*             and the LCD message accordingly.
+* (private)
+****************************************************************************************/
 static void ControlDisplayTask(void){
 	DB1_TURN_ON();
 	switch (CurrentAlarmState){
 	case ALARM_OFF:
-		if (PreviousAlarmState != CurrentAlarmState){		//display "alarm off" on the lcd
+		if (PreviousAlarmState != CurrentAlarmState){		//display "alarm off" on the LCD
 			LcdDispLineClear(1);
 			LcdDispString("ALARM OFF");
 			PreviousAlarmState = CurrentAlarmState;
@@ -63,7 +70,7 @@ static void ControlDisplayTask(void){
 		}else{}
 		break;
 	case ALARM_ON:
-		if (PreviousAlarmState != CurrentAlarmState){		//display "alarm on" on the lcd
+		if (PreviousAlarmState != CurrentAlarmState){		//display "alarm on" on the LCD
 			LcdDispLineClear(1);
 			LcdDispString("ALARM ON");
 			PreviousAlarmState = CurrentAlarmState;

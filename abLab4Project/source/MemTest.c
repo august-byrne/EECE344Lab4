@@ -4,25 +4,19 @@
  *	the checksum of all of the values between the two supplied addresses.
  *	It also accounts for the terminal count bug.
  *  Created on: Oct 18, 2020
- *      Author: August
+ *  Last Edited on: 11/28/20
+ *      Author: August Byrne
  */
 
 #include "MCUType.h"               /* Include header files                    */
 #include "MemTest.h"
 
-INT16U CalcChkSum(INT8U *startaddr, INT8U *endaddr);
-
 INT16U CalcChkSum(INT8U *startaddr, INT8U *endaddr){
-
 	INT16U check_sum = 0;
-	INT32U terminal_check = (INT32U) startaddr;
-	if (terminal_check != 0xFFFFFFFF){
-	while (startaddr <= endaddr){
-		check_sum += *startaddr;	//add all of the data in the addresses listed
-		startaddr ++;				//make the pointer point to the next address
+	while (startaddr < endaddr){
+		check_sum += (INT16U) *startaddr;	//add all of the data in the addresses listed
+		startaddr ++;	//make the pointer point to the next address
 	}
-	}else{
-		check_sum = *startaddr;
-	}
+	check_sum += (INT16U) *startaddr;	//add the last index to the checksum, navigating around the terminal count bug
 	return check_sum;
 }
